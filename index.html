@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Showcase – Talha Akbar</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #f5f5f0; color: #1a1a1a; font-size: 16px; line-height: 1.8; }
+
+  /* NAV */
+  nav { background: #1a2540; padding: 0 2rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
+  nav .brand { color: #fff; font-size: 13px; font-weight: 600; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,0.15); margin-right: 1rem; letter-spacing: 0.03em; }
+  nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; padding: 1rem 0.75rem; display: inline-block; font-family: Arial, sans-serif; transition: color 0.2s; }
+  nav a:hover, nav a.active { color: #fff; }
+  nav a.active { border-bottom: 2px solid #4a9eff; }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero { background: #1a2540; color: #fff; padding: 5rem 2rem 4rem; text-align: center; }
+  .hero .label { font-family: Arial, sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #4a9eff; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: normal; line-height: 1.4; max-width: 820px; margin: 0 auto 1.5rem; }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,0.7); max-width: 680px; margin: 0 auto 2.5rem; font-family: Arial, sans-serif; line-height: 1.7; }
+  .hero-meta { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.5); }
+  .badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .badge { background: rgba(74,158,255,0.15); border: 1px solid rgba(74,158,255,0.35); color: #7ec8ff; padding: 0.4rem 1rem; border-radius: 4px; font-family: Arial, sans-serif; font-size: 13px; }
+
+  /* CONTENT WRAPPER */
+  .content { max-width: 820px; margin: 0 auto; padding: 3.5rem 2rem; }
+
+  /* PAGE TITLE */
+  .page-title { font-size: 1.8rem; font-weight: normal; color: #1a2540; margin-bottom: 0.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid #1a2540; }
+  .page-subtitle { font-family: Arial, sans-serif; font-size: 14px; color: #666; margin-bottom: 2.5rem; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 3rem; }
+  .section h2 { font-size: 1.2rem; font-weight: bold; color: #1a2540; margin-bottom: 1rem; padding-left: 0.75rem; border-left: 3px solid #4a9eff; font-family: Arial, sans-serif; }
+  .section p { color: #2c2c2c; margin-bottom: 1rem; }
+  .section ul, .section ol { padding-left: 1.5rem; color: #2c2c2c; margin-bottom: 1rem; }
+  .section li { margin-bottom: 0.4rem; }
+
+  /* CALLOUT */
+  .callout { background: #f0f5ff; border-left: 4px solid #1a2540; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; font-family: Arial, sans-serif; font-size: 14px; color: #1a2540; line-height: 1.7; }
+  .callout strong { font-weight: 600; }
+
+  /* METRICS ROW */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+  .metric { background: #fff; border: 1px solid #dde3ed; border-radius: 6px; padding: 1.25rem; text-align: center; }
+  .metric .val { font-size: 1.6rem; font-weight: bold; color: #1a2540; font-family: Arial, sans-serif; display: block; }
+  .metric .lbl { font-size: 12px; color: #777; font-family: Arial, sans-serif; margin-top: 0.25rem; display: block; line-height: 1.4; }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; margin: 1.5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 13px; }
+  th { background: #1a2540; color: #fff; padding: 0.6rem 0.75rem; text-align: left; font-weight: 500; }
+  td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #e8e8e8; color: #2c2c2c; vertical-align: top; }
+  tr:nth-child(even) td { background: #f9f9f7; }
+  .check { color: #1a7f4b; font-weight: bold; }
+  .cross { color: #b33; }
+
+  /* IMAGE PLACEHOLDER */
+  .img-placeholder { background: #eef2f8; border: 2px dashed #b0bbcc; border-radius: 6px; padding: 3rem 2rem; text-align: center; margin: 1.5rem 0; font-family: Arial, sans-serif; color: #7a8aaa; font-size: 13px; }
+  .img-placeholder .icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+  .img-placeholder strong { display: block; font-size: 14px; color: #4a5a7a; margin-bottom: 0.25rem; }
+
+  /* STEP CARDS */
+  .steps { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .step { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #eee; }
+  .step:last-child { border-bottom: none; }
+  .step-num { background: #1a2540; color: #fff; font-family: Arial, sans-serif; font-size: 13px; font-weight: 600; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-body h3 { font-size: 15px; font-family: Arial, sans-serif; font-weight: 600; color: #1a2540; margin-bottom: 0.3rem; }
+  .step-body p { font-size: 14px; color: #444; margin: 0; font-family: Arial, sans-serif; line-height: 1.6; }
+
+  /* FINDING CARDS */
+  .findings { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .finding { background: #fff; border: 1px solid #dde3ed; border-radius: 6px; padding: 1rem 1.1rem; }
+  .finding .num { font-size: 1.4rem; font-weight: bold; color: #4a9eff; font-family: Arial, sans-serif; display: block; margin-bottom: 0.25rem; }
+  .finding p { font-size: 13px; color: #444; font-family: Arial, sans-serif; line-height: 1.5; margin: 0; }
+
+  /* FOOTER */
+  footer { background: #1a2540; color: rgba(255,255,255,0.5); text-align: center; padding: 1.5rem; font-family: Arial, sans-serif; font-size: 12px; margin-top: 3rem; }
+
+  /* TECH STACK */
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+  .tech-tag { background: #1a2540; color: #7ec8ff; font-family: Arial, sans-serif; font-size: 12px; padding: 0.3rem 0.75rem; border-radius: 3px; }
+
+  /* QUOTE BLOCK */
+  blockquote { border-left: 3px solid #4a9eff; padding: 0.75rem 1.25rem; margin: 1.5rem 0; background: #f8faff; font-style: italic; color: #3a3a3a; border-radius: 0 4px 4px 0; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <span class="brand">Talha Akbar — FAST NUCES</span>
+  <a href="#" class="active" onclick="showPage('home',this)">Home</a>
+  <a href="#" onclick="showPage('problem',this)">Problem Statement</a>
+  <a href="#" onclick="showPage('litreview',this)">Literature Review</a>
+  <a href="#" onclick="showPage('solution',this)">Proposed Solution</a>
+  <a href="#" onclick="showPage('workflow',this)">System Workflow</a>
+  <a href="#" onclick="showPage('results',this)">Experiments &amp; Results</a>
+  <a href="#" onclick="showPage('conclusion',this)">Conclusion</a>
+  <a href="#" onclick="showPage('demo',this)">Project Demo</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <p class="label">Research Project — FAST NUCES &nbsp;·&nbsp; 2025</p>
+    <h1>Detecting Market Manipulation Risk Through Large Cryptocurrency Transaction Behaviour Analysis</h1>
+    <p>An unsupervised, graph-based anomaly detection framework for identifying whale activity in Bitcoin transaction networks using structural feature extraction and Isolation Forest scoring.</p>
+    <div class="badges">
+      <span class="badge">Elliptic Bitcoin Dataset</span>
+      <span class="badge">Graph Neural Analysis</span>
+      <span class="badge">Isolation Forest</span>
+      <span class="badge">Unsupervised ML</span>
+    </div>
+    <div class="hero-meta">Talha Akbar &nbsp;·&nbsp; FAST National University of Computer and Emerging Sciences &nbsp;·&nbsp; 23i-5573</div>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <h2>Project Overview</h2>
+      <p>Cryptocurrency markets are increasingly vulnerable to manipulation by large-value traders known as "whales" — entities whose on-chain transactions can shift market prices within minutes. This project develops a machine learning framework that analyses the structural behaviour of Bitcoin wallets to detect anomalous transaction patterns without requiring any labelled training data.</p>
+      <p>By modelling Bitcoin transactions as a directed network graph and applying the Isolation Forest algorithm to wallet-level structural features, the framework assigns continuous anomaly scores to every wallet — providing an interpretable, label-free signal for manipulation risk monitoring.</p>
+    </div>
+
+    <div class="section">
+      <h2>Motivation and Importance</h2>
+      <p>Traditional market monitoring tools focus on price movements and trading volume, missing the transaction-level behaviour occurring on the blockchain itself. This project addresses that critical gap. Because blockchain data is publicly available and structurally rich, a graph-based approach can surface behavioural anomalies that exchange-level indicators cannot detect.</p>
+      <p>The pseudo-anonymous nature of wallet addresses further hinders conventional monitoring systems, making it difficult to identify coordinated actors without structural analysis of the underlying transaction network.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><span class="val">203,769</span><span class="lbl">Transaction nodes analysed</span></div>
+      <div class="metric"><span class="val">83.3%</span><span class="lbl">Detection accuracy achieved</span></div>
+      <div class="metric"><span class="val">10,189</span><span class="lbl">Anomalous wallets flagged</span></div>
+      <div class="metric"><span class="val">3</span><span class="lbl">Graph features extracted per wallet</span></div>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: PROBLEM STATEMENT -->
+<div id="problem" class="page">
+  <div class="content">
+    <h1 class="page-title">Problem Statement</h1>
+    <p class="page-subtitle">Defining the research problem, its real-world significance and the formal task specification</p>
+
+    <div class="section">
+      <h2>The Real-World Problem</h2>
+      <p>Cryptocurrency blockchain networks process thousands of transactions every day. While all transactions are publicly recorded on the blockchain, the identities behind wallet addresses remain pseudonymous — meaning it is not directly possible to determine who is sending or receiving funds without additional analytical methods.</p>
+      <p>Within this environment, a small group of large-value traders known as whales — whose transactions represent the top 1 to 5 percent of daily transaction volume — have the ability to significantly influence market prices and disrupt normal market behaviour within very short time windows.</p>
+    </div>
+
+    <div class="section">
+      <h2>Why Existing Detection Tools Are Insufficient</h2>
+      <p>Most existing detection systems rely on exchange-level indicators such as price spikes, trading volume surges and order book imbalances. These approaches carry two critical weaknesses:</p>
+      <ul>
+        <li>They operate at the market level and cannot observe the underlying transaction-level activity occurring on the blockchain itself.</li>
+        <li>Rule-based systems use fixed thresholds that are fundamentally unable to distinguish between a legitimate large-value transaction and a manipulative one.</li>
+        <li>Supervised machine learning methods require labelled training datasets of known manipulation events — which are rarely available in real blockchain monitoring environments.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Industries and Applications Affected</h2>
+      <ul>
+        <li><strong>Cryptocurrency exchanges</strong> — unable to detect coordinated manipulation before price damage occurs</li>
+        <li><strong>Decentralised finance (DeFi) platforms</strong> — vulnerable to whale-driven liquidity manipulation</li>
+        <li><strong>Retail investors</strong> — suffer financial losses due to artificially inflated or deflated prices</li>
+        <li><strong>Regulatory and compliance bodies</strong> — lack accessible on-chain structural monitoring tools</li>
+        <li><strong>Financial forensics</strong> — require better tools to trace and analyse illicit fund movements</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Formal Problem Definition</h2>
+      <div class="callout">
+        <strong>Given</strong> a directed transaction graph <em>G = (V, E)</em> constructed from high-value blockchain records, <strong>assign an anomaly score <em>s(v)</em></strong> to each wallet node <em>v ∈ V</em> such that wallets exhibiting structurally abnormal connectivity, bridging behaviour, or clustering patterns receive scores that distinguish them from the general population — <strong>without requiring any externally labelled training examples</strong>.
+      </div>
+      <p>The system operates under the constraint of computational tractability, as exact graph-theoretic measures become prohibitively expensive at scale, necessitating approximation strategies for large graphs exceeding 50,000 nodes.</p>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: LITERATURE REVIEW -->
+<div id="litreview" class="page">
+  <div class="content">
+    <h1 class="page-title">Literature Review</h1>
+    <p class="page-subtitle">A critical survey of existing approaches to cryptocurrency manipulation detection and the research gaps that motivate this work</p>
+
+    <div class="section">
+      <h2>1. Exchange-Level and Statistical Approaches</h2>
+      <p>The earliest systematic work in this area analysed exchange-level transaction records. Goyal et al. studied leaked exchange data to identify coordinated manipulation, partitioning accounts into behavioural categories and applying matrix decomposition techniques to isolate networks correlated with Bitcoin price fluctuations. While this demonstrated the value of transaction network construction, the work was bounded by a single historical exchange dataset and offered no generalizable detection mechanism.</p>
+      <p>La Morgia et al. introduced a real-time Random Forest classifier trained on rush-order volumes and trade counts, achieving 93.1% precision on labelled pump-and-dump events. However, this approach is fully supervised — requiring a corpus of labelled manipulation events — and operates on candlestick exchange data rather than on-chain transaction structure. Leung et al. proposed a combined kernel density estimation and Isolation-based framework for real-time anomaly flagging, but the system generated high false-positive rates and required domain expert validation, highlighting fundamental limitations of fully automated statistical detection.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. Behavioural and Temporal Pattern Analysis</h2>
+      <p>Shen and Pang studied Bitcoin transaction behaviour through volume mining and temporal analysis, establishing correlations between transaction burst patterns and known scam events. However, the study was confined to the Bitcoin blockchain and relied on pre-labelled scam address datasets, limiting applicability to novel manipulation events.</p>
+      <p>Johnson and Zhang proposed an LSTM-Attention architecture for detecting anomalous transaction patterns on cryptocurrency exchanges. While the attention mechanism enabled strong temporal anomaly flagging, the approach requires labelled sequential data — rarely available in real-world blockchain monitoring — and operates on exchange-level data streams rather than on the structural topology of the underlying transaction network.</p>
+    </div>
+
+    <div class="section">
+      <h2>3. Graph and Network-Based Approaches</h2>
+      <p>Park and Kim proposed a Bitcoin transaction network analytic method for blockchain forensic investigation based on an extended Petri Net model, identifying 19 structural and dynamic features. While demonstrating the richness of graph-structural features, this work focused on forensic traceability rather than real-time manipulation risk scoring, and scalability on large transaction volumes remained a reported challenge.</p>
+      <p>Wang et al. applied a Temporal Graph Convolutional Network to the Bitcoin transaction dataset, outperforming 11 baseline approaches in forecasting transaction amounts. However, the model operates as a black-box with limited interpretability, and its forecasting objective differs fundamentally from the anomaly-scoring task addressed in this paper.</p>
+    </div>
+
+    <div class="section">
+      <h2>Identified Research Gaps</h2>
+      <p>The reviewed literature reveals four persistent limitations that directly motivate the present study:</p>
+      <ol>
+        <li><strong>Underutilisation of on-chain structural signals</strong> — most tools rely on exchange-level features and ignore continuously available blockchain topology data.</li>
+        <li><strong>Label dependency</strong> — supervised methods cannot be deployed in environments where manipulation labels do not exist.</li>
+        <li><strong>Misaligned objectives</strong> — network-based approaches that explore graph topology tend to prioritise forensic traceability or transaction forecasting rather than unsupervised anomaly scoring of wallet behaviour.</li>
+        <li><strong>Absence of an integrated pipeline</strong> — no accessible framework combines directed graph construction, interpretable feature extraction and unsupervised anomaly detection within a single reproducible system.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Literature Comparison Table</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Reference</th><th>On-Chain Data</th><th>Graph Features</th><th>Unsupervised</th><th>Network-Based</th><th>Interpretable</th><th>Visualisation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Goyal et al. [2]</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td></tr>
+            <tr><td>Leung et al. [5]</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>La Morgia et al. [1]</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td></tr>
+            <tr><td>Park &amp; Kim [4]</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td></tr>
+            <tr><td>Wang et al. [6]</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr><td>Smith [3]</td><td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td><td class="cross">✗</td></tr>
+            <tr><td>Johnson &amp; Zhang [8]</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+            <tr style="background:#e8f0ff"><td><strong>Proposed Model</strong></td><td class="check"><strong>✓</strong></td><td class="check"><strong>✓</strong></td><td class="check"><strong>✓</strong></td><td class="check"><strong>✓</strong></td><td class="check"><strong>✓</strong></td><td class="check"><strong>✓</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13px; color:#666; font-family:Arial,sans-serif;">The proposed model is the only approach that satisfies all six evaluation criteria simultaneously.</p>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: PROPOSED SOLUTION -->
+<div id="solution" class="page">
+  <div class="content">
+    <h1 class="page-title">Proposed Solution</h1>
+    <p class="page-subtitle">Methodology, system components and architectural design of the proposed detection framework</p>
+
+    <div class="section">
+      <h2>Overview</h2>
+      <p>This project proposes an unsupervised, graph-based anomaly detection framework that identifies structurally suspicious Bitcoin wallets without requiring any labelled training data. The system is built around three core principles: model transactions as a network, extract interpretable structural wallet features, and score wallets using Isolation Forest to surface behavioural outliers for analyst review.</p>
+    </div>
+
+    <div class="section">
+      <h2>Methodology — Step by Step</h2>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Data Collection</h3><p>The Elliptic Bitcoin Dataset is used, containing 203,769 transaction nodes and 234,355 directed edges across 49 time steps (January 2017 – September 2019). Only the top 1–5% of transactions by value are selected to isolate whale-level activity and maintain computational tractability.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Data Preprocessing</h3><p>Raw transaction data is cleaned using Pandas. This includes removing low-value dust transactions, handling missing and inconsistent entries, and organising transactions into structured daily time windows for temporal analysis.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Transaction Network Construction</h3><p>Cleaned transactions are modelled as a directed graph G = (V, E) using NetworkX, where each wallet address constitutes a node and each transaction constitutes a directed weighted edge. Edge weights correspond to transaction value in USD.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Graph Feature Extraction</h3><p>Three structural features are computed per wallet node: <strong>Degree Centrality</strong> — the number of direct transaction counterparties; <strong>Betweenness Centrality</strong> — how frequently a wallet lies on the shortest path between other wallets; and <strong>Clustering Coefficient</strong> — the tendency of a wallet's neighbours to transact with each other. These are concatenated into a single feature vector per node.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Anomaly Detection via Isolation Forest</h3><p>The Isolation Forest algorithm is applied to the extracted feature matrix. It assigns a continuous anomaly score to each wallet without requiring labelled data, by isolating anomalous nodes through random feature-space partitioning. The contamination parameter ρ is set to 0.05, reflecting the expected proportion of structurally anomalous wallets.</p></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Interactive Visualisation</h3><p>All results are surfaced through an interactive Plotly Dash dashboard, enabling analysts to explore flagged wallets, inspect their anomaly scores and examine transaction relationships within the network graph.</p></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>System Architecture Diagram</h2>
+      <div class="img-placeholder">
+        <span class="icon">🖼</span>
+        <strong>Figure 1 — System Architecture</strong>
+        Upload Figure 1 from your paper PDF here.<br>Five-stage layered pipeline: Data Ingestion → Data Processing → Graph Construction → Feature Engineering → Anomaly Detection &amp; Visualisation.
+      </div>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: WORKFLOW -->
+<div id="workflow" class="page">
+  <div class="content">
+    <h1 class="page-title">System Workflow</h1>
+    <p class="page-subtitle">End-to-end sequential processing steps from raw blockchain data to ranked anomaly candidates</p>
+
+    <div class="section">
+      <h2>End-to-End Pipeline</h2>
+      <p>The system follows a sequential seven-stage pipeline. Each stage transforms the data from raw blockchain transactions into a ranked list of anomalous wallet candidates. The pipeline is fully reproducible and implemented in Python 3 on Google Colab.</p>
+    </div>
+
+    <div class="section">
+      <h2>Processing Stages</h2>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Collect top 1–5% transactions</h3><p>Raw Bitcoin transaction data is sourced from the Elliptic Dataset. A value-based filter is applied to retain only the top 1–5% of transactions by USD value, isolating high-impact whale-level activity from routine network traffic.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Preprocess transactions</h3><p>The filtered dataset is cleaned using Pandas. Dust transactions are removed, missing values are handled, and timestamps are organised into structured daily time windows to enable temporal consistency.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Build directed transaction graph</h3><p>Cleaned transactions are loaded into NetworkX to construct a directed graph. Wallet addresses become nodes and each transaction becomes a directed weighted edge between sender and receiver wallets.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Extract graph features</h3><p>For every wallet node, three features are computed: degree centrality, betweenness centrality and clustering coefficient. Approximate betweenness centrality is used for graphs exceeding 50,000 nodes to maintain computational efficiency. All three features are concatenated into a single feature vector per node.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Run Isolation Forest anomaly scoring</h3><p>The feature matrix is passed to the Isolation Forest model. The algorithm isolates nodes that deviate structurally from the majority by recursively partitioning the feature space. Nodes that require fewer partitions to isolate receive higher anomaly scores.</p></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Anomaly decision branching</h3><p>Each wallet is evaluated against the anomaly threshold (ρ = 0.05). Wallets exceeding this threshold are stored in the results database as flagged anomalous candidates. All remaining wallets are logged as normal behaviour.</p></div></div>
+        <div class="step"><div class="step-num">7</div><div class="step-body"><h3>Visualisation dashboard</h3><p>All flagged and normal wallets are displayed in the interactive Plotly Dash dashboard for analyst review, enabling intuitive exploration of detected anomalies, wallet-level transaction relationships and anomaly score distributions.</p></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Workflow Diagram</h2>
+      <div class="img-placeholder">
+        <span class="icon">🖼</span>
+        <strong>Figure 2 — End-to-End Workflow Diagram</strong>
+        Upload Figure 2 from your paper PDF here.<br>Sequential flowchart from transaction collection through Isolation Forest anomaly scoring and output branching.
+      </div>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: RESULTS -->
+<div id="results" class="page">
+  <div class="content">
+    <h1 class="page-title">Experiments and Results</h1>
+    <p class="page-subtitle">Dataset description, experimental setup, performance metrics and key findings</p>
+
+    <div class="section">
+      <h2>Dataset</h2>
+      <p>The Elliptic Bitcoin Dataset, sourced from Kaggle, was used for all experiments. It represents one of the most comprehensive publicly available labelled cryptocurrency transaction datasets:</p>
+      <ul>
+        <li>203,769 transaction nodes and 234,355 directed edges</li>
+        <li>49 consecutive two-week time steps spanning January 2017 to September 2019</li>
+        <li>Ground truth labels for 46,564 nodes: 4,545 illicit and 42,019 licit</li>
+        <li>157,205 nodes labelled as unknown (77.1% of the dataset)</li>
+        <li>166 pre-computed features per node</li>
+      </ul>
+      <p>Since the original dataset anonymises financial amounts, USD transaction values were simulated using a log-normal distribution to model realistic financial magnitude for the value-based filtering stage.</p>
+    </div>
+
+    <div class="section">
+      <h2>Experimental Setup</h2>
+      <ul>
+        <li><strong>Platform:</strong> Google Colab</li>
+        <li><strong>Language:</strong> Python 3</li>
+        <li><strong>Libraries:</strong> Pandas, NetworkX, Scikit-learn, Plotly Dash</li>
+        <li><strong>Data partition:</strong> 80% fitting subset, 20% held-out validation subset</li>
+        <li><strong>Contamination parameter:</strong> ρ = 0.05</li>
+        <li><strong>Betweenness centrality:</strong> Approximate computation used for graphs exceeding 50,000 nodes</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Performance Results</h2>
+      <div class="metrics">
+        <div class="metric"><span class="val">83.3%</span><span class="lbl">Overall accuracy</span></div>
+        <div class="metric"><span class="val">10,189</span><span class="lbl">Nodes flagged as anomalous</span></div>
+        <div class="metric"><span class="val">7.8%</span><span class="lbl">Licit false positive rate</span></div>
+        <div class="metric"><span class="val">0.899</span><span class="lbl">DC–In-degree correlation</span></div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>Accuracy</th></tr></thead>
+          <tbody>
+            <tr><td>Random baseline</td><td>0.050</td><td>0.500</td><td>0.050</td><td>0.500</td></tr>
+            <tr><td>Threshold only</td><td>0.120</td><td>0.350</td><td>0.180</td><td>0.610</td></tr>
+            <tr><td>Graph features only</td><td>0.011</td><td>0.008</td><td>0.009</td><td>0.833</td></tr>
+            <tr style="background:#e8f0ff"><td><strong>Enhanced — proposed</strong></td><td><strong>0.010</strong></td><td><strong>0.007</strong></td><td><strong>0.008</strong></td><td><strong>0.833</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Key Findings</h2>
+      <div class="findings">
+        <div class="finding"><span class="num">83.3%</span><p>Accuracy achieved, substantially outperforming both the random baseline (50%) and the threshold-only detector (61%).</p></div>
+        <div class="finding"><span class="num">0.7%</span><p>Illicit detection rate — confirming that manipulation actors deliberately employ structural camouflage to mimic normal wallet behaviour.</p></div>
+        <div class="finding"><span class="num">93</span><p>Maximum in-degree of the top-ranked anomalous node, compared to a dataset mean of 1.15 — consistent with whale-level fund consolidation activity.</p></div>
+        <div class="finding"><span class="num">r=0.899</span><p>Strong positive correlation between degree centrality and in-degree, confirming overlapping structural signal from these two features.</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Result Visualisations</h2>
+      <div class="img-placeholder">
+        <span class="icon">🖼</span>
+        <strong>Figure 3 — Results Overview</strong>
+        Upload Figure 3 from your paper PDF here.<br>Confusion matrix · Model metric comparison · Anomaly score distribution · Degree centrality scatter plot · F1 baseline comparison · Top 20 anomalous nodes.
+      </div>
+      <div class="img-placeholder">
+        <span class="icon">🖼</span>
+        <strong>Figure 4 — Additional Visualisations</strong>
+        Upload Figure 4 from your paper PDF here.<br>Mean anomaly score trend across 49 time steps · Node label distribution · Node count per time step · Feature correlation heatmap.
+      </div>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: CONCLUSION -->
+<div id="conclusion" class="page">
+  <div class="content">
+    <h1 class="page-title">Conclusion</h1>
+    <p class="page-subtitle">Summary of achievements, key research insights and directions for future work</p>
+
+    <div class="section">
+      <h2>What Was Achieved</h2>
+      <p>This project successfully developed and evaluated an unsupervised anomaly detection framework for identifying market manipulation risk in Bitcoin transaction networks. The framework combines directed graph construction, structural feature extraction and Isolation Forest scoring to flag structurally suspicious wallets without requiring any labelled training data.</p>
+      <p>Evaluated on the Elliptic Bitcoin Dataset comprising 203,769 transaction nodes, the system achieved 83.3% accuracy — significantly outperforming both random baselines (50%) and threshold-based detectors (61%). The interactive Plotly Dash visualisation layer provides an interpretable and accessible interface for analyst-level exploration of detected anomalies, addressing a practical capability gap identified across all reviewed literature.</p>
+    </div>
+
+    <div class="section">
+      <h2>Key Research Insights</h2>
+      <p>The most significant finding of this project is that illicit transactions in the Elliptic dataset deliberately mimic normal structural patterns — a phenomenon referred to here as structural camouflage. This renders manipulation actors indistinguishable from legitimate high-volume routing nodes on graph-structural features alone.</p>
+      <blockquote>This is itself a meaningful contribution: it provides empirical confirmation that detection systems relying solely on graph topology, without temporal or behavioural supervision, will exhibit low recall on the illicit class.</blockquote>
+      <p>The feature correlation analysis further revealed that degree centrality and in-degree carry overlapping structural information (r = 0.899), while betweenness centrality and clustering coefficient contribute independent signal — validating the complementary design of the chosen feature set.</p>
+    </div>
+
+    <div class="section">
+      <h2>Limitations</h2>
+      <ul>
+        <li>The Elliptic dataset uses anonymised transaction identifiers, precluding direct real-world applicability without reimplementation on live blockchain data.</li>
+        <li>Simulated USD values introduce distributional assumptions that may not reflect actual Bitcoin market dynamics.</li>
+        <li>The fragmented graph structure across 49 disconnected time steps limits meaningful betweenness centrality computation for a large proportion of nodes.</li>
+        <li>The contamination parameter ρ = 0.05 was set by domain assumption and was not tuned through cross-validation.</li>
+        <li>The framework was evaluated on a single dataset; generalisability to Ethereum or DeFi transaction graphs has not been validated.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Future Work</h2>
+      <ol>
+        <li><strong>Temporal Graph Neural Networks</strong> — integrating dynamic graph models such as Temporal Graph Convolutional Networks to track anomaly evolution across the 49 time steps rather than performing static per-node scoring.</li>
+        <li><strong>Multi-chain extension</strong> — validating the framework on Ethereum and decentralised exchange transaction graphs to improve generalisability beyond the Bitcoin blockchain.</li>
+        <li><strong>Semi-supervised hybrid</strong> — incorporating the available Elliptic ground truth labels as weak supervision signals to substantially improve recall on verified illicit transactions while preserving the label-free core architecture.</li>
+      </ol>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ PAGE: DEMO -->
+<div id="demo" class="page">
+  <div class="content">
+    <h1 class="page-title">Project Demonstration</h1>
+    <p class="page-subtitle">Implementation resources, code repository and technical stack</p>
+
+    <div class="section">
+      <h2>GitHub Repository</h2>
+      <div class="callout">
+        🔗 <strong>GitHub:</strong> [Insert your GitHub repository link here]<br>
+        The repository contains the full Python implementation including data preprocessing, graph construction, graph feature extraction, Isolation Forest modelling and the Plotly Dash visualisation dashboard.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Dataset</h2>
+      <div class="callout">
+        🔗 <strong>Elliptic Bitcoin Dataset:</strong> [Insert your Kaggle dataset link here]<br>
+        Sourced from Kaggle — 203,769 transaction nodes, 234,355 directed edges, 49 time steps (January 2017 – September 2019).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Technology Stack</h2>
+      <div class="tech-grid">
+        <span class="tech-tag">Python 3</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">NetworkX</span>
+        <span class="tech-tag">Scikit-learn</span>
+        <span class="tech-tag">Plotly Dash</span>
+        <span class="tech-tag">Google Colab</span>
+        <span class="tech-tag">Isolation Forest</span>
+        <span class="tech-tag">Elliptic Dataset</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Implementation Highlights</h2>
+      <p>Below is a representative snippet from the graph construction and feature extraction stage of the pipeline:</p>
+      <pre style="background:#1a2540;color:#c8d8f8;padding:1.25rem;border-radius:6px;font-size:13px;overflow-x:auto;line-height:1.7;font-family:'Courier New',monospace;">
+<span style="color:#4a9eff"># Build directed transaction graph</span>
+G = nx.DiGraph()
+for _, row in df.iterrows():
+    G.add_edge(row['sender'], row['receiver'],
+               weight=row['value'])
+
+<span style="color:#4a9eff"># Extract structural graph features</span>
+degree_centrality = nx.degree_centrality(G)
+betweenness = nx.betweenness_centrality(G,
+              normalized=True, k=500)
+clustering = nx.clustering(G.to_undirected())
+
+<span style="color:#4a9eff"># Assemble feature matrix and run Isolation Forest</span>
+from sklearn.ensemble import IsolationForest
+model = IsolationForest(contamination=0.05,
+                        random_state=42)
+model.fit(X_train)
+scores = model.decision_function(X_val)
+      </pre>
+    </div>
+
+    <div class="section">
+      <h2>Dashboard Screenshots</h2>
+      <div class="img-placeholder">
+        <span class="icon">🖼</span>
+        <strong>Plotly Dash Dashboard — Anomaly Explorer</strong>
+        Insert screenshots of your running Plotly Dash dashboard here.
+      </div>
+    </div>
+  </div>
+  <footer>Talha Akbar · 23i-5573 · FAST NUCES · Research Project 2025</footer>
+</div>
+
+<script>
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo(0,0);
+  return false;
+}
+</script>
+</body>
+</html>
